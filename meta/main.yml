@@ -1,4 +1,5 @@
 galaxy_info:
+  role_name: certbot
   author: MethorZ
   description: Ansible certbot support role for Debian
   company: MethorZ

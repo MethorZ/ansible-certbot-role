@@ -1,0 +1,13 @@
+---
+##
+# Defaults for certbot support
+##
+
+# Enable certbot support
+certbot_enabled: true
+
+# Create missing certificates
+certbot_create_missing: true
+
+# Nginx support will add certificates automatically to the nginx vhost. Beware when using managed vhosts files!
+certbot_plugin: standalone # nginx|standalone

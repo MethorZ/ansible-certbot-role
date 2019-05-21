@@ -1,0 +1,17 @@
+---
+##
+# Certbot default configuration for Debian
+##
+__certbot_package: certbot
+__certbot_packages_mode: latest # latest|present
+__certbot_bin: certbot
+
+__certbot_command_standalone: >-
+  {{ certbot_bin }} certonly --standalone --noninteractive --agree-tos
+  --email {{ certbot_certificate.email }}
+  -d {{ certbot_certificate.domains | join(',') }}
+
+__certbot_command_nginx: >-
+  {{ certbot_bin }} --nginx --noninteractive --agree-tos
+  --email {{ certbot_certificate.email }}
+  -d {{ certbot_certificate.domains | join(',') }}

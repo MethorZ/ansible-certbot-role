@@ -1,0 +1,19 @@
+---
+#
+# Setup all required packages
+#
+- name: APT | Updating the apt cache
+  apt:
+    update_cache: yes
+
+- name: APT | Setting up certbot package
+  apt:
+    name: "{{ certbot_package }}"
+    state: "{{ certbot_packages_mode }}"
+  when: certbot_enabled
+
+- name: APT | Install certbot NGINX plugin
+  apt:
+    name: python-certbot-nginx
+    state: present
+  when: certbot_enabled and certbot_plugin == 'nginx'

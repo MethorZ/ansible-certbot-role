@@ -1,0 +1,32 @@
+---
+
+- name: FACTS - Define certbot standalone command
+  set_fact:
+    certbot_command: "{{ __certbot_command_standalone }}"
+  when: certbot_plugin == 'standalone'
+
+- name: FACTS - Define certbot nginx command
+  set_fact:
+    certbot_command: "{{ __certbot_command_nginx }}"
+  when: certbot_plugin == 'nginx'
+
+- name: STAT | Check if certificate already exists
+  stat:
+    path: /etc/letsencrypt/live/{{ certbot_certificate.domains | first }}/cert.pem
+  register: certbot_letsencrypt_certificate
+
+- name: SERVICE | Stop NGINX in standalone mode for certificate creation
+  service:
+    name: nginx
+    state: stopped
+  when: not certbot_letsencrypt_certificate.stat.exists and certbot_plugin == 'standalone'
+
+- name: CERTBOT | Create new certificate if not exists
+  shell: "{{ certbot_command }}"
+  when: not certbot_letsencrypt_certificate.stat.exists
+
+- name: SERVICE | Start NGINX in standalone mode after certificate creation
+  service:
+    name: nginx
+    state: started
+  when: not certbot_letsencrypt_certificate.stat.exists and certbot_plugin == 'standalone'

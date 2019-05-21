@@ -1,0 +1,18 @@
+galaxy_info:
+  author: MethorZ
+  description: Ansible certbot support role for Debian
+  company: MethorZ
+  license: license (BSD, MIT)
+  min_ansible_version: 2.5
+  platforms:
+    - name: Debian
+      versions:
+        - all
+  galaxy_tags:
+    - development
+    - certbot
+    - letsencrypt
+    - certificates
+    - ssl
+
+dependencies: []

@@ -1,0 +1,19 @@
+---
+
+- name: INCLUDE_VARS | OS specific vars
+  include_vars: "{{ ansible_facts['os_family'] }}.yml"
+
+- name: FACTS - Define certbot package
+  set_fact:
+    certbot_package: "{{ __certbot_package }}"
+  when: certbot_package is not defined
+
+- name: FACTS - Define certbot packages mode
+  set_fact:
+    certbot_packages_mode: "{{ __certbot_packages_mode }}"
+  when: certbot_packages_mode is not defined
+
+- name: FACTS - Define certbot binary
+  set_fact:
+    certbot_bin: "{{ __certbot_bin }}"
+  when: certbot_bin is not defined

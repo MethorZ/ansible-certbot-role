@@ -24,7 +24,7 @@
   when: not certbot_letsencrypt_certificate.stat.exists and certbot_plugin == 'standalone'
 
 - name: CERTBOT | Create new certificate if not exists
-  shell: "{{ certbot_command }}"
+  command: "{{ certbot_command }}"
   when: not certbot_letsencrypt_certificate.stat.exists
 
 - name: SERVICE | Start NGINX in standalone mode after certificate creation

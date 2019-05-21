@@ -1,5 +1,7 @@
 ---
-
+##
+# Loops through configured certificates creating them one by one
+##
 - name: FACTS - Define certbot standalone command
   set_fact:
     certbot_command: "{{ __certbot_command_standalone }}"
@@ -12,7 +14,7 @@
 
 - name: STAT | Check if certificate already exists
   stat:
-    path: /etc/letsencrypt/live/{{ certbot_certificate.domains | first }}/cert.pem
+    path: /etc/letsencrypt/live/{{ certbot_certificate.domain }}/cert.pem
   register: certbot_letsencrypt_certificate
 
 - name: SERVICE | Stop NGINX in standalone mode for certificate creation

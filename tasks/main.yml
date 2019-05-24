@@ -1,22 +1,24 @@
 ---
-##
-# Import variable definitions and defaults
-##
-- name: IMPORT_TASKS | Setup Variable definitions / defaults
-  import_tasks: setup-variables.yml
+- block:
+  ##
+  # Import variable definitions and defaults
+  ##
+  - name: IMPORT_TASKS | Setup Variable definitions / defaults
+    import_tasks: setup-variables.yml
 
-##
-# Setup based on OS
-##
-- name: IMPORT_TASKS | Setup certbot
-  import_tasks: "setup-Debian.yml"
-  when: certbot_enabled and ansible_facts['os_family'] == 'Debian'
+  ##
+  # Setup based on OS
+  ##
+  - name: IMPORT_TASKS | Setup certbot
+    import_tasks: "setup-Debian.yml"
+    when: ansible_facts['os_family'] == 'Debian'
 
-- name: INCLUDE_TASKS | Create domain certificates using certbot
-  include_tasks: create-certificate.yml
-  with_items: "{{ certbot_certificates }}"
-  when:
-    - certbot_enabled
-    - certbot_create_missing
-  loop_control:
-    loop_var: certbot_certificate
+  - name: INCLUDE_TASKS | Create domain certificates using certbot
+    include_tasks: create-certificate.yml
+    with_items: "{{ certbot_certificates }}"
+    when:
+      - certbot_create_missing
+    loop_control:
+      loop_var: certbot_certificate
+
+  when: certbot_enabled

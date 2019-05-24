@@ -4,7 +4,7 @@
 ##
 
 # Enable certbot support
-certbot_enabled: true
+certbot_enabled: false
 
 # Create missing certificates
 certbot_create_missing: true

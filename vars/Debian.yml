@@ -3,7 +3,7 @@
 # Certbot default configuration for Debian
 ##
 __certbot_package: certbot
-__certbot_packages_mode: latest # latest|present
+__certbot_packages_mode: present # latest|present
 __certbot_bin: certbot
 
 __certbot_command_standalone: >-
